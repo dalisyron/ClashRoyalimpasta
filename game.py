@@ -1,4 +1,4 @@
-import pygame, sys, time, random
+import pygame, UI, sys, time, random, grid
 
 from pygame.locals import *
 from UI import *
@@ -6,6 +6,7 @@ from UI import *
 pygame.init()
 
 Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
+Grid = grid.Grid()
 
 def terminate():
     pygame.quit()
