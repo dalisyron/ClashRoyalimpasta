@@ -33,8 +33,10 @@ def blitMap(d):
 
 def blitLeftSelector(s, d):
   for i in range(len(s.card_list)):
-    pygame.draw.rect(d, RED, (BOARD_WIDTH - CARD_STACK_SIZE, i * CARD_STACK_SIZE , CARD_STACK_SIZE, CARD_STACK_SIZE))
+    c = s.card_list[i]
+    d.blit(c.image, (0, i * CARD_STACK_SIZE))
 
 def blitRightSelector(s, d):
   for i in range(len(s.card_list)):
-    pygame.draw.rect(d, GREEN, (0, i * CARD_STACK_SIZE , CARD_STACK_SIZE, CARD_STACK_SIZE))
+    c = s.card_list[i]
+    d.blit(c.image, (BOARD_WIDTH - CARD_STACK_SIZE, CARD_STACK_SIZE * i))
