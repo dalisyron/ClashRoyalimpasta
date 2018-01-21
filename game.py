@@ -7,6 +7,7 @@ pygame.init()
 
 Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
 Grid = grid.Grid()
+Selector = [selector.CardSelector(), selector.CardSelector()]
 
 def terminate():
     pygame.quit()
@@ -22,6 +23,8 @@ def checkForQuit():
 
 while True:
     Display.fill(WHITE)
-    UI.blitBackground(Display)
+    UI.blitMap(Display)
+    UI.blitRightSelector(Selector[0], Display)
+    UI.blitLeftSelector(Selector[1], Display)
     checkForQuit()
     pygame.display.update()
