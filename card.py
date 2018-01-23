@@ -5,7 +5,7 @@ names = ['Big_Hero', 'Knight']
 class Card:
   def __init__(self, side_ = None, name_ = None):
     if side_ == None:
-      side = random.choice([0, 1])
+      side_ = random.choice([0, 1])
     if name_ == None:
       name_ = random.choice(names)
     self.name = name_

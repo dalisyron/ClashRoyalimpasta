@@ -33,6 +33,7 @@ def updateUI():
     UI.blitMap(Display)
     UI.blitLeftSelector(Selector[0], Display)
     UI.blitRightSelector(Selector[1], Display)
+    UI.blitGrid(Grid, Display)
 
 def init():
     for i in range(4):
