@@ -34,10 +34,28 @@ def init():
 
 init()
 
+mouseX, mouseY = 0, 0
+dX, dY = 0, 0
+
+mouseClicked = False
+
+selected_card = None
+
 while True:
     Display.fill(WHITE)
     updateUI()
     checkForQuit()
+    mouseX, mouseY = pygame.mouse.get_pos()
     for event in pygame.event.get():
-        if event.mouse
+        if event.type == MOUSEBUTTONDOWN:
+            mouseClicked = True
+            selected_card = Util.getSelectorCard(mouseX, mouseY, Selector[0])
+            if selected_card == None:
+                selected_card = Util.getSelectorCard(mouseX, mouseY, Selector[1])
+            dX, dY = mouseX - selected_card.box[0], mouseY - selected_card.box[1]
+            #print(selected_card)
+        elif event.type == MOUSEBUTTONUP:
+            mouseClicked = False
+    if mouseClicked == True and selected_card != None:
+        Display.blit(selected_card.image, (mouseX - dX, mouseY - dY))
     pygame.display.update()

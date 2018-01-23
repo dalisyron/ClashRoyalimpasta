@@ -1,4 +1,4 @@
-import Util
+import Util, UI
 
 mapMat = Util.buildGrid('map.txt')
 
@@ -13,5 +13,5 @@ class Grid:
           self.mat[i][j] = 1
   def get(self, r, c):
     return self.mat[r][c]
-
-g = Grid()
+  def getCellByPixel(self, x, y):
+    return (x - UI.CARD_STACK_SIZE) // UI.CARD_WIDTH, y // UI.CARD_HEIGHT

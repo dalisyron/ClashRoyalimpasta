@@ -11,6 +11,7 @@ class Card:
     self.card_type = type_
     self.side = side_
     self.image = Data.Heros_Dic[type_]["IMAGE"][side_]
+    self.box = (0, 0, 0, 0)
 
 def getRandomCard():
   return Card()
