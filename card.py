@@ -3,6 +3,14 @@ import random, Data
 names = ['Big_Hero', 'Knight']
 
 class Card:
-  def __init__(self, t = names[random.randint(0, len(names) - 1)]):
-    self.card_type = t
-    self.image = Data.Heros_Dic[t]["IMAGE"]
+  def __init__(self, side_ = None, type_ = None):
+    if side_ == None:
+      side = random.choice([0, 1])
+    if type_ == None:
+      type_ = random.choice(names)
+    self.card_type = type_
+    self.side = side_
+    self.image = Data.Heros_Dic[type_]["IMAGE"][side_]
+
+def getRandomCard():
+  return Card()
