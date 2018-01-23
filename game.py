@@ -8,7 +8,10 @@ pygame.init()
 Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
 Grid = grid.Grid()
 Selector = [selector.CardSelector(0), selector.CardSelector(1)]
-Heroes = [[], []]
+
+currentHeroes = [[], []]
+currentBullets = []
+
 
 def terminate():
     pygame.quit()
@@ -31,9 +34,11 @@ def init():
     for i in range(4):
         Selector[0].addCard(card.Card(side_ = 0))
         Selector[1].addCard(card.Card(side_ = 1))
-
 init()
 
+def addHero(x,y,Name,Side):
+    Current_Heros[Side].append(Hero.Hero(x,y,Name,Side))
+    
 mouseX, mouseY = 0, 0
 dX, dY = 0, 0
 
