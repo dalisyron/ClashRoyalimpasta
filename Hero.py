@@ -5,7 +5,7 @@ class Hero:
 
         self.name=name_
         self.side=side_
-        heros_atributes = Heros_Data.Heros_Dic[name]
+        heros_atributes = Data.Heros_Dic[name_]
         self.position_x=x
         self.position_y=y
         self.speed_Rate=heros_atributes["SPEED_RATE"]

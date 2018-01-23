@@ -1,4 +1,4 @@
-import pygame, UI, sys, time, random, grid, card
+import pygame, UI, sys, time, random, grid, card, Hero
 
 from pygame.locals import *
 from UI import *
@@ -9,7 +9,7 @@ Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
 Grid = grid.Grid()
 Selector = [selector.CardSelector(0), selector.CardSelector(1)]
 
-currentHeroes = [[], []]
+currentHeros = [[], []]
 currentBullets = []
 
 def terminate():
@@ -25,7 +25,9 @@ def checkForQuit():
         pygame.event.post(event)
 
 def addHero(x,y,Name,Side):
-    currentHeros[Side].append(Hero.Hero(x,y,Name,Side))
+    new_hero = Hero.Hero(x,y,Name,Side)
+    currentHeros[Side].append(new_hero)
+    Grid.mat[y][x] = new_hero
 
 def updateUI():
     UI.blitMap(Display)
@@ -69,7 +71,7 @@ while True:
         elif event.type == MOUSEBUTTONUP:
             pos = Grid.getCellByPixel(mouseX, mouseY)
             if (selected_card != None):
-                Grid.mat[pos[1]][pos[0]] = selected_card
+                addHero(pos[0], pos[1], selected_card.name, selected_card.side)
             mouseClicked = False
             selected_card = None
     if mouseClicked == True and selected_card != None:
