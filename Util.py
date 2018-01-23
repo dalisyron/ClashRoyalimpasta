@@ -1,5 +1,3 @@
-import selector
-
 def buildGrid(dest):
   f = open(dest, 'r')
   f_str = f.read()
@@ -11,8 +9,4 @@ def pointCollide(point, rect):
   else:
     return False
 
-def getSelectorCard(x, y, selector_):
-  for i in selector_.card_list:
-    if (pointCollide((x, y), i.box)):
-      return i
-  return None
+

@@ -1,4 +1,4 @@
-import card, UI
+import card, Util, UI
 
 class CardSelector:
   CARD_SIZE = 50
@@ -9,3 +9,9 @@ class CardSelector:
     card_.box = ((UI.BOARD_WIDTH - UI.CARD_STACK_SIZE) * card_.side, len(self.card_list) * UI.CARD_STACK_SIZE, 
                 (UI.BOARD_WIDTH - UI.CARD_STACK_SIZE) * card_.side + UI.CARD_STACK_SIZE, (len(self.card_list) + 1) * (UI.CARD_STACK_SIZE))
     self.card_list.append(card_)
+
+def getSelectorCard(x, y, selector_):
+  for i in selector_.card_list:
+    if (Util.pointCollide((x, y), i.box)):
+      return i
+  return None
