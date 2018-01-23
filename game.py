@@ -37,7 +37,7 @@ def init():
 init()
 
 def addHero(x,y,Name,Side):
-    Current_Heros[Side].append(Hero.Hero(x,y,Name,Side))
+    currentHeros[Side].append(Hero.Hero(x,y,Name,Side))
     
 mouseX, mouseY = 0, 0
 dX, dY = 0, 0
