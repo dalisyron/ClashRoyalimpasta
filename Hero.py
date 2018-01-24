@@ -26,7 +26,7 @@ def herosProcess(currentHeros,currentBullets,Cnt):
 
 
         if Cnt % hero.damage_Rate == 0:
-            newBullet = Bullet.Bullet(hero.position_x , hero.position_y , hero.position_x+130 ,hero.position_y+130,hero.name,hero.side) # bayad dorost hesabi mosahkhs she in example e
+            newBullet = Bullet.Bullet(hero.position_x , hero.position_y , hero.position_x+130 ,hero.position_y+130,hero.bullet,hero.side) # bayad dorost hesabi mosahkhs she in example e
             currentBullets.append(newBullet)
 
 
