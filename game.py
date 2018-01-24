@@ -62,6 +62,8 @@ while True:
     updateUI()
     checkForQuit()
     mouseX, mouseY = pygame.mouse.get_pos()
+    Hero.herosProcess(currentHeros, currentHeros, cnt)
+    grid.updateGrid(Grid, currentHeros)
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
             mouseClicked = True
