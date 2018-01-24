@@ -5,6 +5,7 @@ WHITE = (255, 255, 255)
 RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
+LIGHT_YELLOW = (255, 255, 204)
 
 GRASS_SURFACE     = pygame.image.load('Images/grass.png')
 STONE_SURFACE     = pygame.image.load('Images/stone.png')
@@ -35,11 +36,13 @@ def blitLeftSelector(s, d):
   for i in range(len(s.card_list)):
     c = s.card_list[i]
     d.blit(c.image, (0, i * CARD_STACK_SIZE))
+    pygame.draw.rect(d, BLACK, (c.box[0], c.box[1], c.box[2] - c.box[0], c.box[3] - c.box[1]), 4)
 
 def blitRightSelector(s, d):
   for i in range(len(s.card_list)):
     c = s.card_list[i]
     d.blit(c.image, (BOARD_WIDTH - CARD_STACK_SIZE, CARD_STACK_SIZE * i))
+    pygame.draw.rect(d, BLACK, (c.box[0], c.box[1], c.box[2] - c.box[0], c.box[3] - c.box[1]), 4)
 
 def blitGrid(g, d):
   for i in range(len(g.mat)):

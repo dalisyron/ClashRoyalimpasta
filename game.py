@@ -58,7 +58,7 @@ cnt = 0
 
 while True:
     cnt += 1
-    Display.fill(WHITE)
+    Display.fill(LIGHT_YELLOW)
     updateUI()
     checkForQuit()
     mouseX, mouseY = pygame.mouse.get_pos()
