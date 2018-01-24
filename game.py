@@ -12,6 +12,7 @@ Selector = [selector.CardSelector(0), selector.CardSelector(1)]
 
 currentHeros = [[], []]
 currentBullets = []
+error_sound = pygame.mixer.Sound('Sounds/badswap.wav')
 
 def terminate():
     pygame.quit()
@@ -41,6 +42,9 @@ def init():
         Selector[0].addCard(card.Card(side_ = 0))
         Selector[1].addCard(card.Card(side_ = 1))
 
+def errorSound():
+    error_sound.play()
+
 init()
 
 mouseX, mouseY = 0, 0
@@ -54,9 +58,6 @@ cnt = 0
 
 while True:
     cnt += 1
-    if cnt % 100 == 0:
-        for i in Grid.mat:
-            print(i)
     Display.fill(WHITE)
     updateUI()
     checkForQuit()
@@ -72,8 +73,15 @@ while True:
             #print(selected_card)
         elif event.type == MOUSEBUTTONUP:
             pos = Grid.getCellByPixel(mouseX, mouseY)
+            if (pos[1] >= Grid.height or pos[0] >= Grid.width or pos[1] < 0 or pos[0] < 0):
+                errorSound()
+                mouseClicked = False
+                selected_card = None
             if (selected_card != None):
-                addHero(pos[0], pos[1], selected_card.name, selected_card.side)
+                if (Grid.get(pos[1], pos[0]) == 0):
+                    addHero(pos[0], pos[1], selected_card.name, selected_card.side)
+                else:
+                    errorSound()
             mouseClicked = False
             selected_card = None
     if mouseClicked == True and selected_card != None:

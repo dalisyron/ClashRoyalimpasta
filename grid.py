@@ -14,4 +14,5 @@ class Grid:
   def get(self, r, c):
     return self.mat[r][c]
   def getCellByPixel(self, x, y):
-    return (x - UI.CARD_STACK_SIZE) // UI.TILE_WIDTH, y // UI.TILE_WIDTH
+    ret = (x - UI.CARD_STACK_SIZE) // UI.TILE_WIDTH, y // UI.TILE_WIDTH
+    return ret
