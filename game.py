@@ -4,6 +4,7 @@ from pygame.locals import *
 from UI import *
 
 pygame.init()
+pygame.display.set_caption('Clash Impasta')
 
 Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
 Grid = grid.Grid()
