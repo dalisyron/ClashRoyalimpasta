@@ -44,7 +44,5 @@ def blitRightSelector(s, d):
 def blitGrid(g, d):
   for i in range(len(g.mat)):
     for j in range(len(g.mat[0])):
-      print(type(g.mat[i][j]))
       if (type(g.mat[i][j]) == Hero.Hero):
-        print("yes")
         d.blit(Data.Heros_Dic[g.mat[i][j].name]["IMAGE"][g.mat[i][j].side], (CARD_STACK_SIZE + (j * TILE_WIDTH), i * TILE_WIDTH - TILE_WIDTH // 4))
