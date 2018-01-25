@@ -43,7 +43,7 @@ def findTarget(grid,hero):
         node = queue.get()
 
         for i in range(4):
-            if (isValid(grid,node.x+dx[i],node.y+dy[i]) and (node.x+dx[i] , node.y+dy[i]) not in checked):
+            if (isValid(grid,node.y+dy[i],node.x+dx[i]) and (node.x+dx[i] , node.y+dy[i]) not in checked):
                 if (type(g[node.y+dy[i]][node.x+dx[i]])==Hero and g[node.y+dy[i]][node.x+dx[i]].side != side):
                     
                     target = Node(node.x+dx[i],node.y+dy[i],node,node.d+1)
