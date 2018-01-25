@@ -14,4 +14,4 @@ Heros_Dic={"Big_Hero" :
                 'IMAGE':{0:pygame.image.load('Images/Knight.gif'), 1:pygame.image.load('Images/Knight1.gif')}}
            }
 
-Bullets_Dic={"Sword" : {"DAMAGE" : 30 , "SPEED" : 40 , "RANGE" : 3 }}
+Bullets_Dic={"Sword" : {"DAMAGE" : 30 , "SPEED" : 40 , "RANGE" : 2 }}

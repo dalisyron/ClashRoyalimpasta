@@ -1,4 +1,4 @@
-import pygame, UI, sys, time, random, grid, card, Hero
+import pygame, UI, sys, time, random, grid, card, Hero,Bullet
 
 from pygame.locals import *
 from UI import *
@@ -62,8 +62,9 @@ while True:
     updateUI()
     checkForQuit()
     mouseX, mouseY = pygame.mouse.get_pos()
-    Hero.herosProcess(grid,currentHeros, currentBullets, cnt)
+    Hero.herosProcess(Grid,currentHeros, currentBullets, cnt)
     grid.updateGrid(Grid, currentHeros)
+    Bullet.bulletsProcess(currentBullets)
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
             mouseClicked = True

@@ -16,6 +16,10 @@ class Grid:
   def getCellByPixel(self, x, y):
     ret = (x - UI.CARD_STACK_SIZE) // UI.TILE_WIDTH, y // UI.TILE_WIDTH
     return ret
+  # man ino ezafe kardam
+  def getPixelByCell(self,x,y):
+    ret = (x * (UI.TILE_WIDTH-0.5) + UI.CARD_STACK_SIZE) , y * (UI.TILE_WIDTH - 0.5)
+    return ret
 
 def updateGrid(g, hero_list):
   for i in range(g.height):

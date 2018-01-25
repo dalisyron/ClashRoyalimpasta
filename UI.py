@@ -49,3 +49,11 @@ def blitGrid(g, d):
     for j in range(len(g.mat[0])):
       if (type(g.mat[i][j]) == Hero.Hero):
         d.blit(Data.Heros_Dic[g.mat[i][j].name]["IMAGE"][g.mat[i][j].side], (CARD_STACK_SIZE + (j * TILE_WIDTH), i * TILE_WIDTH - TILE_WIDTH // 4))
+
+
+
+#-------Bayad bezanim
+
+
+def blitBullets(currentBullets,d):
+  pass
