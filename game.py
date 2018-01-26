@@ -36,6 +36,8 @@ def updateUI():
     UI.blitLeftSelector(Selector[0], Display)
     UI.blitRightSelector(Selector[1], Display)
     UI.blitGrid(Grid, Display)
+    #new
+    UI.blitBullets(currentBullets,Display)
 
 def init():
     for i in range(4):
@@ -63,8 +65,9 @@ while True:
     checkForQuit()
     mouseX, mouseY = pygame.mouse.get_pos()
     Hero.herosProcess(Grid,currentHeros, currentBullets, cnt)
-    grid.updateGrid(Grid, currentHeros)
     Bullet.bulletsProcess(currentBullets)
+    grid.updateGrid(Grid, currentHeros)
+
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
             mouseClicked = True

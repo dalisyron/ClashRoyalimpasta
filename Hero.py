@@ -33,8 +33,8 @@ def findTarget(grid,hero):
     g=grid.mat
     checked = []
     side=hero.side
-    dy=[0,0,-1,1]
-    dx=[-1,1,0,0]
+    dy=[0,1,-1,0]
+    dx=[-1,0,0,1]
     queue = Q.Queue()
     queue.put(Node(hero.position_x, hero.position_y,None,0))
     checked.append((hero.position_x, hero.position_y))
@@ -88,7 +88,7 @@ def herosProcess(grid,currentHeros,currentBullets,cnt):
                     if target.d <= damageRange:
                         (x1,y1)=grid.getPixelByCell(hero.position_x , hero.position_y )
                         (x2,y2)=grid.getPixelByCell(target.x,target.y)
-                        newBullet = Bullet.Bullet(x1 , y1 , x2 ,y2 ,hero.bullet,hero.side) # bayad dorost hesabi mosahkhs she in example e
+                        newBullet = Bullet.Bullet(x1 , y1 , x2 ,y2 ,hero.bullet,hero.side)
                         currentBullets.append(newBullet)
 
 

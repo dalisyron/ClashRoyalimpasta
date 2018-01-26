@@ -56,4 +56,6 @@ def blitGrid(g, d):
 
 
 def blitBullets(currentBullets,d):
-  pass
+  for bullet in currentBullets:
+    if bullet.is_destroyed == False :
+      pygame.draw.circle(d,(0,0,0),(int(bullet.position_x) , int(bullet.position_y)),6,3)
