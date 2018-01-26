@@ -58,7 +58,7 @@ def findTarget(grid,hero):
     #ta inja nazdik tarin target malom shode
 
 
-def nextPosition(hero,target,range):
+def nextPosition(hero,target,range,g):
     if target != None:
         
         if target.d > range:
@@ -67,6 +67,9 @@ def nextPosition(hero,target,range):
 
             hero.position_x = target.x
             hero.position_y = target.y
+            # shayad ezafe benazar byad vli baraye inke dotaE to ye khone naran niaze
+            g[hero.position_y][hero.position_x] = hero
+
 
 
 
@@ -81,7 +84,7 @@ def herosProcess(grid,currentHeros,currentBullets,cnt):
                 damageRange = Data.Bullets_Dic[hero.bullet]["RANGE"]
                 if cnt % hero.speed_Rate == 0:
                     target = findTarget(grid,hero)
-                    nextPosition(hero , target , damageRange)
+                    nextPosition(hero , target , damageRange,grid.mat)
                     # bayad hero.nextPostion() bashe
 
                 if cnt % hero.damage_Rate == 0:
