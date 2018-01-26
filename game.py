@@ -65,7 +65,7 @@ while True:
     checkForQuit()
     mouseX, mouseY = pygame.mouse.get_pos()
     Hero.herosProcess(Grid,currentHeros, currentBullets, cnt)
-    Bullet.bulletsProcess(currentBullets)
+    Bullet.bulletsProcess(Grid,currentBullets)
     grid.updateGrid(Grid, currentHeros)
 
     for event in pygame.event.get():

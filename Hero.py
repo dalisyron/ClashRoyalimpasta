@@ -13,6 +13,7 @@ class Hero:
         self.health=heros_atributes["HEALTH"]
         self.bullet=heros_atributes["BULLET"]
         self.damage_Rate=heros_atributes["DAMAGE_RATE"]
+        self.is_alive=True
 class Node:
     def __init__(self,x,y,p,d_):
         self.x=x
@@ -76,20 +77,21 @@ def nextPosition(hero,target,range):
 def herosProcess(grid,currentHeros,currentBullets,cnt):
     for heros in currentHeros:
         for hero in heros:
-            damageRange = Data.Bullets_Dic[hero.bullet]["RANGE"]
-            if cnt % hero.speed_Rate == 0:
-                target = findTarget(grid,hero)
-                nextPosition(hero , target , damageRange)
-                # bayad hero.nextPostion() bashe
+            if hero.is_alive == True:
+                damageRange = Data.Bullets_Dic[hero.bullet]["RANGE"]
+                if cnt % hero.speed_Rate == 0:
+                    target = findTarget(grid,hero)
+                    nextPosition(hero , target , damageRange)
+                    # bayad hero.nextPostion() bashe
 
-            if cnt % hero.damage_Rate == 0:
-                target = findTarget(grid,hero)
-                if target!=None:
-                    if target.d <= damageRange:
-                        (x1,y1)=grid.getPixelByCell(hero.position_x , hero.position_y )
-                        (x2,y2)=grid.getPixelByCell(target.x,target.y)
-                        newBullet = Bullet.Bullet(x1 , y1 , x2 ,y2 ,hero.bullet,hero.side)
-                        currentBullets.append(newBullet)
+                if cnt % hero.damage_Rate == 0:
+                    target = findTarget(grid,hero)
+                    if target!=None:
+                        if target.d <= damageRange:
+                            (x1,y1)=grid.getPixelByCell(hero.position_x , hero.position_y )
+                            (x2,y2)=grid.getPixelByCell(target.x,target.y)
+                            newBullet = Bullet.Bullet(x1 , y1 , x2 ,y2 ,hero.bullet,hero.side)
+                            currentBullets.append(newBullet)
 
 
 

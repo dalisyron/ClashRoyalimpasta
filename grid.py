@@ -29,4 +29,5 @@ def updateGrid(g, hero_list):
   for hero_listi in hero_list:
     for hero in hero_listi:
       if (hero.position_x >= 0 and hero.position_x < g.width and hero.position_y >= 0 and hero.position_y < g.height):
-        g.mat[hero.position_y][hero.position_x] = hero
+        if hero.is_alive == True:
+         g.mat[hero.position_y][hero.position_x] = hero
