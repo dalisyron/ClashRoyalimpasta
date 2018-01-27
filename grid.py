@@ -9,7 +9,7 @@ class Grid:
     self.mat = [[0 for j in range(self.width)] for i in range(self.height)]
     for i in range(self.height):
       for j in range(self.width):
-        if (mapMat[i][j] in ['d', 'l']):
+        if (mapMat[i][j] in ['d', 'l', 's']):
           self.mat[i][j] = 1
   def get(self, r, c):
     return self.mat[r][c]

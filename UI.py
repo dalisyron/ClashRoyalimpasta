@@ -7,14 +7,18 @@ GREEN = (  0, 255,   0)
 BLUE  = (  0,   0, 255)
 LIGHT_YELLOW = (255, 255, 204)
 
-GRASS_SURFACE     = pygame.image.load('Images/grass.png')
-STONE_SURFACE     = pygame.image.load('Images/stone.png')
-LIGHTWOOD_SURFACE = pygame.image.load('Images/lightwood.png')
-DARKWOOD_SURFACE  = pygame.image.load('Images/darkwood.png')
+GRASS_SURFACE      = pygame.image.load('Images/grass.png')
+STONE_SURFACE      = pygame.image.load('Images/stone.png')
+LIGHTWOOD_SURFACE  = pygame.image.load('Images/lightwood.png')
+DARKWOOD_SURFACE   = pygame.image.load('Images/darkwood.png')
+TALL_TREE_SURFACE  = pygame.image.load('Images/Tree_Tall.png')
+SHORT_TREE_SURFACE = pygame.image.load('Images/Tree_Short.png')
 
-img_surface = {'g':GRASS_SURFACE, 's':STONE_SURFACE, 'l':LIGHTWOOD_SURFACE, 'd':DARKWOOD_SURFACE}
+img_surface = {'g':GRASS_SURFACE, 's':STONE_SURFACE, 'l':LIGHTWOOD_SURFACE, 'd':DARKWOOD_SURFACE,
+               't':SHORT_TREE_SURFACE, 'T':TALL_TREE_SURFACE}
 
 mapMat = Util.buildGrid('map.txt')
+decMat = Util.buildGrid('decorations.txt')
 
 TILE_WIDTH = 50
 TILE_HEGIHT = 85
@@ -31,6 +35,9 @@ def blitMap(d):
         mat_col = (j // TILE_WIDTH) - 1
         tmp_image = img_surface[mapMat[mat_row][mat_col]]
         d.blit(tmp_image, (j, i - (TILE_HEGIHT - TILE_WIDTH)))
+        if (decMat[mat_row][mat_col] != '0'):
+          dec_image = img_surface[decMat[mat_row][mat_col]]
+          d.blit(dec_image, (j, i - (TILE_HEGIHT - TILE_WIDTH)))
 
 def blitLeftSelector(s, d):
   for i in range(len(s.card_list)):
