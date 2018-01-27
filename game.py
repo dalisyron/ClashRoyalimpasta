@@ -38,11 +38,20 @@ def updateUI():
     UI.blitGrid(Grid, Display)
     #new
     UI.blitBullets(currentBullets,Display)
+    UI.blitDecorations(Display)
 
 def init():
     for i in range(4):
         Selector[0].addCard(card.Card(side_ = 0))
         Selector[1].addCard(card.Card(side_ = 1))
+    tower_hero = Hero.Hero(0, 1, "Big_Tower", 0, True)
+    tower_hero2 = Hero.Hero(0, 4, "Small_Tower", 0, True)
+    currentHeros[0].append(tower_hero)
+    currentHeros[0].append(tower_hero2)
+    tower_herop = Hero.Hero(13, 1, "Big_Tower", 0, True)
+    tower_hero2p = Hero.Hero(13, 4, "Small_Tower", 0, True)
+    currentHeros[0].append(tower_herop)
+    currentHeros[0].append(tower_hero2p)
 
 def errorSound():
     error_sound.play()

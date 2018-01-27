@@ -13,9 +13,12 @@ LIGHTWOOD_SURFACE  = pygame.image.load('Images/lightwood.png')
 DARKWOOD_SURFACE   = pygame.image.load('Images/darkwood.png')
 TALL_TREE_SURFACE  = pygame.image.load('Images/Tree_Tall.png')
 SHORT_TREE_SURFACE = pygame.image.load('Images/Tree_Short.png')
+TALL_TOWER         = pygame.image.load('Images/tall_tower.png')
+SMALL_TOWER        = pygame.image.load('Images/small_tower.png')
 
 img_surface = {'g':GRASS_SURFACE, 's':STONE_SURFACE, 'l':LIGHTWOOD_SURFACE, 'd':DARKWOOD_SURFACE,
-               't':SHORT_TREE_SURFACE, 'T':TALL_TREE_SURFACE}
+               't':SHORT_TREE_SURFACE, 'T':TALL_TREE_SURFACE, 'B':TALL_TOWER, 'S':SMALL_TOWER, 
+               'P':TALL_TOWER, 'Q':SMALL_TOWER}
 
 mapMat = Util.buildGrid('map.txt')
 decMat = Util.buildGrid('decorations.txt')
@@ -35,6 +38,12 @@ def blitMap(d):
         mat_col = (j // TILE_WIDTH) - 1
         tmp_image = img_surface[mapMat[mat_row][mat_col]]
         d.blit(tmp_image, (j, i - (TILE_HEGIHT - TILE_WIDTH)))
+
+def blitDecorations(d):
+  for i in range(0, BOARD_HEIGHT, TILE_WIDTH):
+      for j in range(CARD_STACK_SIZE, BOARD_WIDTH - CARD_STACK_SIZE, TILE_WIDTH):
+        mat_row = i // TILE_WIDTH
+        mat_col = (j // TILE_WIDTH) - 1
         if (decMat[mat_row][mat_col] != '0'):
           dec_image = img_surface[decMat[mat_row][mat_col]]
           d.blit(dec_image, (j, i - (TILE_HEGIHT - TILE_WIDTH)))
@@ -60,6 +69,7 @@ def blitGrid(g, d):
 
 
 #-------Bayad bezanim
+#+++++++ok dadash faghat yezare yavash tar
 
 
 def blitBullets(currentBullets,d):

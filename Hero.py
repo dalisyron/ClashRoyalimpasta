@@ -2,7 +2,7 @@ import Data,Bullet
 import queue as Q
 
 class Hero:
-    def __init__(self,x,y,name_,side_):
+    def __init__(self,x,y,name_,side_,istower = False):
 
         self.name=name_
         self.side=side_
@@ -14,6 +14,8 @@ class Hero:
         self.bullet=heros_atributes["BULLET"]
         self.damage_Rate=heros_atributes["DAMAGE_RATE"]
         self.is_alive=True
+        self.is_tower=istower
+
 class Node:
     def __init__(self,x,y,p,d_):
         self.x=x
@@ -82,7 +84,7 @@ def herosProcess(grid,currentHeros,currentBullets,cnt):
         for hero in heros:
             if hero.is_alive == True:
                 damageRange = Data.Bullets_Dic[hero.bullet]["RANGE"]
-                if cnt % hero.speed_Rate == 0:
+                if cnt % hero.speed_Rate == 0 and hero.is_tower == False:
                     target = findTarget(grid,hero)
                     nextPosition(hero , target , damageRange,grid.mat)
                     # bayad hero.nextPostion() bashe

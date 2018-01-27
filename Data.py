@@ -11,8 +11,21 @@ Heros_Dic={"Big_Hero" :
                "SPEED_RATE":10,
                "HEALTH":100,
                "BULLET":"Sword",
-                'IMAGE':{0:pygame.image.load('Images/Knight.gif'), 1:pygame.image.load('Images/Knight1.gif')}}
+                'IMAGE':{0:pygame.image.load('Images/Knight.gif'), 1:pygame.image.load('Images/Knight1.gif')}},
+            "Big_Tower" :{
+                "DAMAGE_RATE":90 ,
+                "SPEED_RATE":10,
+                "HEALTH":500,
+                "BULLET":"Sword",
+                'IMAGE':{0:pygame.image.load('Images/tall_tower.png'), 1:pygame.image.load('Images/tall_tower.png')}},
+            "Small_Tower" :{
+                "DAMAGE_RATE":90 ,
+                "SPEED_RATE":10,
+                "HEALTH":250,
+                "BULLET":"Sword",
+                'IMAGE':{0:pygame.image.load('Images/small_tower.png'), 1:pygame.image.load('Images/small_tower.png')}}
            }
 
 Bullets_Dic={"Sword" : {"DAMAGE" : 40 , "SPEED" : 3 , "RANGE" : 2 },
              "Gun" : {"DAMAGE" : 30 , "SPEED" : 6 , "RANGE" : 4 }}
+
