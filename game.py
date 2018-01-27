@@ -26,8 +26,8 @@ def checkForQuit():
             terminate()
         pygame.event.post(event)
 
-def addHero(x,y,Name,Side):
-    new_hero = Hero.Hero(x,y,Name,Side)
+def addHero(x,y,Name,Side,is_tower):
+    new_hero = Hero.Hero(x,y,Name,Side,is_tower)
     currentHeros[Side].append(new_hero)
     Grid.mat[y][x] = new_hero
 
@@ -44,18 +44,13 @@ def init():
     for i in range(4):
         Selector[0].addCard(card.Card(side_ = 0))
         Selector[1].addCard(card.Card(side_ = 1))
-    tower_hero = Hero.Hero(0, 2, "Small_Tower", 0, True, -50)
-    tower_hero2 = Hero.Hero(0, 5, "Big_Tower", 0, True, -50)
-    tower_hero3 = Hero.Hero(0, 10, "Small_Tower", 0, True, -50)
-    currentHeros[0].append(tower_hero)
-    currentHeros[0].append(tower_hero2)
-    currentHeros[0].append(tower_hero3)
-    tower_herop = Hero.Hero(19, 2, "Small_Tower", 1, True, -50)
-    tower_hero2p = Hero.Hero(19, 5, "Big_Tower", 1, True, -50)
-    tower_hero3p = Hero.Hero(19, 10, "Small_Tower", 1, True, -50)
-    currentHeros[0].append(tower_herop)
-    currentHeros[0].append(tower_hero2p)
-    currentHeros[0].append(tower_hero3p)
+    addHero(0,  2, "Small_Tower", 0, True)
+    addHero(0,  5, "Big_Tower",   0, True)
+    addHero(0, 10, "Small_Tower", 0, True)
+
+    addHero(19,  2, "Small_Tower", 1, True)
+    addHero(19,  5, "Big_Tower",   1, True)
+    addHero(19, 10, "Small_Tower", 1, True)
 
 def errorSound():
     error_sound.play()
@@ -98,7 +93,7 @@ while True:
                 selected_card = None
             if (selected_card != None):
                 if (Grid.get(pos[1], pos[0]) == 0):
-                    addHero(pos[0], pos[1], selected_card.name, selected_card.side)
+                    addHero(pos[0], pos[1], selected_card.name, selected_card.side, False)
                 else:
                     errorSound()
             mouseClicked = False
