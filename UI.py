@@ -1,10 +1,11 @@
 import pygame, selector, Util, Data, Hero
 
-BLACK        = (  0,   0,   0)
-WHITE        = (255, 255, 255)
-RED          = (255,   0,   0)
-GREEN        = (  0, 255,   0)
-BLUE         = (  0,   0, 255)
+BLACK = (  0,   0,   0)
+WHITE = (255, 255, 255)
+RED   = (255,   0,   0)
+GREEN = (  0, 255,   0)
+YELLOW =( 255, 255, 0  )
+BLUE  = (  0,   0, 255)
 LIGHT_YELLOW = (255, 255, 204)
 YELLOW       = (255, 255,   0)
 
@@ -74,7 +75,6 @@ def blitGrid(g, d):
           color =RED
         d.blit(Data.Heros_Dic[g.mat[i][j].name]["IMAGE"][g.mat[i][j].side], (CARD_STACK_SIZE + (j * TILE_WIDTH), i * TILE_WIDTH - TILE_WIDTH // 4))
         pygame.draw.rect(d,color,( CARD_STACK_SIZE + (j * TILE_WIDTH) , i * TILE_WIDTH - TILE_WIDTH // 4 ,health*TILE_WIDTH,4))
-
 
 
 
