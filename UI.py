@@ -74,7 +74,10 @@ def blitGrid(g, d):
         if health <= 0.25:
           color =RED
         d.blit(Data.Heros_Dic[g.mat[i][j].name]["IMAGE"][g.mat[i][j].side], (CARD_STACK_SIZE + (j * TILE_WIDTH), i * TILE_WIDTH - TILE_WIDTH // 4))
-        pygame.draw.rect(d,color,( CARD_STACK_SIZE + (j * TILE_WIDTH) , i * TILE_WIDTH - TILE_WIDTH // 4 ,health*TILE_WIDTH,4))
+        k = 1
+        if g.mat[i][j].is_tower == True:
+          k += 1
+        pygame.draw.rect(d,color,( CARD_STACK_SIZE + (j * TILE_WIDTH) , i * TILE_WIDTH - TILE_WIDTH // 4 ,health*TILE_WIDTH*k,4))
 
 
 
