@@ -44,14 +44,18 @@ def init():
     for i in range(4):
         Selector[0].addCard(card.Card(side_ = 0))
         Selector[1].addCard(card.Card(side_ = 1))
-    tower_hero = Hero.Hero(0, 1, "Big_Tower", 0, True)
-    tower_hero2 = Hero.Hero(0, 4, "Small_Tower", 0, True)
+    tower_hero = Hero.Hero(0, 2, "Small_Tower", 0, True, -50)
+    tower_hero2 = Hero.Hero(0, 5, "Big_Tower", 0, True, -50)
+    tower_hero3 = Hero.Hero(0, 10, "Small_Tower", 0, True, -50)
     currentHeros[0].append(tower_hero)
     currentHeros[0].append(tower_hero2)
-    tower_herop = Hero.Hero(13, 1, "Big_Tower", 0, True)
-    tower_hero2p = Hero.Hero(13, 4, "Small_Tower", 0, True)
+    currentHeros[0].append(tower_hero3)
+    tower_herop = Hero.Hero(19, 2, "Small_Tower", 1, True, -50)
+    tower_hero2p = Hero.Hero(19, 5, "Big_Tower", 1, True, -50)
+    tower_hero3p = Hero.Hero(19, 10, "Small_Tower", 1, True, -50)
     currentHeros[0].append(tower_herop)
     currentHeros[0].append(tower_hero2p)
+    currentHeros[0].append(tower_hero3p)
 
 def errorSound():
     error_sound.play()

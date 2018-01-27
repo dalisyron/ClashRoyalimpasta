@@ -2,8 +2,12 @@ import Data,Bullet
 import queue as Q
 
 class Hero:
-    def __init__(self,x,y,name_,side_,istower = False):
-
+    def __init__(self,x,y,name_,side_,istower = False, ui_diff = 0, cell_list = None):
+        if (cell_list == None):
+            self.cell_list = [(x, y)]
+        else:
+            self.cell_list = cell_list
+        self.ui_diff = ui_diff
         self.name=name_
         self.side=side_
         heros_atributes = Data.Heros_Dic[name_]

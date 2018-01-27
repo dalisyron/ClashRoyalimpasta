@@ -1,11 +1,12 @@
 import pygame, selector, Util, Data, Hero
 
-BLACK = (  0,   0,   0)
-WHITE = (255, 255, 255)
-RED   = (255,   0,   0)
-GREEN = (  0, 255,   0)
-BLUE  = (  0,   0, 255)
+BLACK        = (  0,   0,   0)
+WHITE        = (255, 255, 255)
+RED          = (255,   0,   0)
+GREEN        = (  0, 255,   0)
+BLUE         = (  0,   0, 255)
 LIGHT_YELLOW = (255, 255, 204)
+YELLOW       = (255, 255,   0)
 
 GRASS_SURFACE      = pygame.image.load('Images/grass.png')
 STONE_SURFACE      = pygame.image.load('Images/stone.png')
@@ -64,7 +65,16 @@ def blitGrid(g, d):
   for i in range(len(g.mat)):
     for j in range(len(g.mat[0])):
       if (type(g.mat[i][j]) == Hero.Hero):
+        health = (g.mat[i][j].health / Data.Heros_Dic[g.mat[i][j].name]["HEALTH"])
+        if health >= 0.65:
+          color = GREEN
+        if health < 0.65:
+          color = YELLOW
+        if health <= 0.25:
+          color =RED
         d.blit(Data.Heros_Dic[g.mat[i][j].name]["IMAGE"][g.mat[i][j].side], (CARD_STACK_SIZE + (j * TILE_WIDTH), i * TILE_WIDTH - TILE_WIDTH // 4))
+        pygame.draw.rect(d,color,( CARD_STACK_SIZE + (j * TILE_WIDTH) , i * TILE_WIDTH - TILE_WIDTH // 4 ,health*TILE_WIDTH,4))
+
 
 
 
