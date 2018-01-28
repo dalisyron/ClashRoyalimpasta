@@ -31,8 +31,10 @@ def addHero(x,y,Name,Side,is_tower):
     currentHeros[Side].append(new_hero)
     Grid.mat[y][x] = new_hero
 
+background_surface = UI.buildBackground()
+
 def updateUI():
-    UI.blitMap(Display)
+    Display.blit(background_surface, (0, 0))
     UI.blitLeftSelector(Selector[0], Display)
     UI.blitRightSelector(Selector[1], Display)
     UI.blitGrid(Grid, Display)

@@ -33,6 +33,20 @@ CARD_STACK_SIZE = 50
 BOARD_WIDTH = TILE_WIDTH * len(mapMat[0]) + 2 * CARD_STACK_SIZE
 BOARD_HEIGHT = TILE_WIDTH * len(mapMat)
 
+def buildBackground():
+  background_surface = pygame.Surface([BOARD_WIDTH,BOARD_HEIGHT], pygame.SRCALPHA, 32)
+  background_surface = background_surface.convert_alpha()
+  for i in range(0, BOARD_HEIGHT, TILE_WIDTH):
+    for j in range(CARD_STACK_SIZE, BOARD_WIDTH - CARD_STACK_SIZE, TILE_WIDTH):
+      mat_row = i // TILE_WIDTH
+      mat_col = (j // TILE_WIDTH) - 1
+      tmp_image = img_surface[mapMat[mat_row][mat_col]]
+      background_surface.blit(tmp_image, (j, i - (TILE_HEGIHT - TILE_WIDTH)))
+  return background_surface
+
+def blitBackground(background_surface, d):
+  d.blit(background_surface, (CARD_STACK_SIZE, 0))
+
 def blitMap(d):
   for i in range(0, BOARD_HEIGHT, TILE_WIDTH):
       for j in range(CARD_STACK_SIZE, BOARD_WIDTH - CARD_STACK_SIZE, TILE_WIDTH):
