@@ -68,6 +68,9 @@ selected_card = None
 
 cnt = 0
 
+clock = pygame.time.Clock()
+clock.tick(60)
+
 while True:
     cnt += 1
     Display.fill(LIGHT_YELLOW)
