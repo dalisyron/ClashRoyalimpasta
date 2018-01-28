@@ -1,9 +1,11 @@
 import pygame, selector, Util, Data, Hero
+from PIL import Image, ImageDraw
 
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 RED   = (255,   0,   0)
 GREEN = (  0, 255,   0)
+GREY  = (138, 128, 128)
 YELLOW =( 255, 255, 0  )
 BLUE  = (  0,   0, 255)
 LIGHT_YELLOW = (255, 255, 204)
@@ -64,17 +66,37 @@ def blitDecorations(d):
           dec_image = img_surface[decMat[mat_row][mat_col]]
           d.blit(dec_image, (j, i - (TILE_HEGIHT - TILE_WIDTH)))
 
-def blitLeftSelector(s, d):
+def drawPie(d, r, angle, center):
+
+  pil_size = r
+  pil_image = Image.new("RGBA", (pil_size, pil_size))
+  pil_draw = ImageDraw.Draw(pil_image)
+  pil_draw.pieslice((0, 0, pil_size-1, pil_size-1), angle, 0, fill=GREY)
+  mode = pil_image.mode
+  size = pil_image.size
+  data = pil_image.tobytes()
+  image = pygame.image.fromstring(data, size, mode)
+  d.blit(image, center)
+
+def blitLeftSelector(s, d, tm):
   for i in range(len(s.card_list)):
     c = s.card_list[i]
     d.blit(c.image, (0, i * CARD_STACK_SIZE))
     pygame.draw.rect(d, BLACK, (c.box[0], c.box[1], c.box[2] - c.box[0], c.box[3] - c.box[1]), 4)
+    val = int(((tm - c.av_time) / c.reload_time) * 360)
+    if (val >= 360):
+      val = 0
+    drawPie(d, CARD_STACK_SIZE, val, ((c.box[0]), (c.box[1])))
 
-def blitRightSelector(s, d):
+def blitRightSelector(s, d, tm):
   for i in range(len(s.card_list)):
     c = s.card_list[i]
     d.blit(c.image, (BOARD_WIDTH - CARD_STACK_SIZE, CARD_STACK_SIZE * i))
     pygame.draw.rect(d, BLACK, (c.box[0], c.box[1], c.box[2] - c.box[0], c.box[3] - c.box[1]), 4)
+    val = int(((tm - c.av_time) / c.reload_time) * 360)
+    if (val >= 360):
+      val = 0
+    drawPie(d, CARD_STACK_SIZE, val, ((c.box[0]), (c.box[1])))
 
 def blitGrid(g, d):
   for i in range(len(g.mat)):

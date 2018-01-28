@@ -1,5 +1,5 @@
 import pygame, UI, sys, time, random, grid, card, Hero,Bullet
-
+from PIL import Image, ImageDraw
 from pygame.locals import *
 from UI import *
 
@@ -35,8 +35,8 @@ background_surface = UI.buildBackground()
 
 def updateUI():
     Display.blit(background_surface, (0, 0))
-    UI.blitLeftSelector(Selector[0], Display)
-    UI.blitRightSelector(Selector[1], Display)
+    UI.blitLeftSelector(Selector[0], Display, pygame.time.get_ticks())
+    UI.blitRightSelector(Selector[1], Display, pygame.time.get_ticks())
     UI.blitGrid(Grid, Display)
     #new
     UI.blitBullets(currentBullets,Display)
@@ -89,6 +89,11 @@ while True:
                 selected_card = selector.getSelectorCard(mouseX, mouseY, Selector[1])
             if (selected_card != None):
                 dX, dY = mouseX - selected_card.box[0], mouseY - selected_card.box[1]
+                if (pygame.time.get_ticks() - selected_card.av_time > Data.Heros_Dic[selected_card.name]["LOADTIME"]):
+                    selected_card.av_time = pygame.time.get_ticks()
+                else:
+                    selected_card = None
+
             #print(selected_card)
         elif event.type == MOUSEBUTTONUP:
             pos = Grid.getCellByPixel(mouseX, mouseY)
