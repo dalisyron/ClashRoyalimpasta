@@ -97,7 +97,7 @@ while True:
                 mouseClicked = False
                 selected_card = None
             if (selected_card != None):
-                if (Grid.get(pos[1], pos[0]) == 0):
+                if (Grid.get(pos[1], pos[0]) == 0 and ((selected_card.side == 0 and pos[0] < Grid.width // 2) or (selected_card.side == 1 and pos[0] >= Grid.width // 2))):
                     addHero(pos[0], pos[1], selected_card.name, selected_card.side, False)
                 else:
                     errorSound()
