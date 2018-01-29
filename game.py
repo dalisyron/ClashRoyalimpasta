@@ -10,7 +10,7 @@ pygame.init()
 
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP,MOUSEBUTTONUP,MOUSEBUTTONDOWN])
 
-flags = FULLSCREEN | DOUBLEBUF
+flags = DOUBLEBUF
 
 pygame.display.set_caption('Clash Impasta')
 
@@ -56,9 +56,10 @@ def updateUI():
     UI.blitDecorations(Display)
 
 def init():
+    names = ['Soldier', 'Knight', 'Viking', 'Zombie']
     for i in range(4):
-        Selector[0].addCard(card.Card(side_ = 0))
-        Selector[1].addCard(card.Card(side_ = 1))
+        Selector[0].addCard(card.Card(side_ = 0, name_ = names[i]))
+        Selector[1].addCard(card.Card(side_ = 1, name_ = names[i]))
     addHero(0,  2, "Small_Tower", 0, True)
     addHero(0,  5, "Big_Tower",   0, True)
     addHero(0, 10, "Small_Tower", 0, True)

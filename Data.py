@@ -21,6 +21,20 @@ Heros_Dic={"Viking" :
               "BULLET":"Sword",
               "LOADTIME":1000,
               'IMAGE':{0:pygame.image.load('Images/Soldier.gif'), 1:pygame.image.load('Images/Soldier1.gif')}},
+            "Big_Hero" :{
+               "DAMAGE_RATE":20 ,
+               "SPEED_RATE":40,
+               "HEALTH":100,
+               "BULLET":"Sword",
+               "LOADTIME":3000,
+                'IMAGE':{0:pygame.image.load('Images/Big_Hero.gif'), 1:pygame.image.load('Images/Big_Hero1.gif')}},
+            "Zombie" :{
+           "DAMAGE_RATE":20 ,
+           "SPEED_RATE":80,
+           "HEALTH":200,
+           "BULLET":"TOF",
+           "LOADTIME":200,
+            'IMAGE':{0:pygame.image.load('Images/zombie.png'), 1:pygame.image.load('Images/zombie1.png')}},
             "Big_Tower" :{
                 "DAMAGE_RATE":90 ,
                 "SPEED_RATE":10,
@@ -38,5 +52,6 @@ Heros_Dic={"Viking" :
            }
 
 Bullets_Dic={"Sword" : {"DAMAGE" : 40 , "SPEED" : 3 , "RANGE" : 2 },
-             "Gun" : {"DAMAGE" : 30 , "SPEED" : 6 , "RANGE" : 4 }, "TowerSword" : {"DAMAGE" : 60 , "SPEED" : 6 , "RANGE" : 8 }}
+             "Gun" : {"DAMAGE" : 30 , "SPEED" : 6 , "RANGE" : 4 }, "TowerSword" : {"DAMAGE" : 60 , "SPEED" : 6 , "RANGE" : 8 }
+             , "TOF" : {"DAMAGE" : 5 , "SPEED" : 6 , "RANGE" : 4 }}
 

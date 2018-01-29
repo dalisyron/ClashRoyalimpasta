@@ -1,6 +1,6 @@
 import random, Data
 
-names = ['Soldier', 'Knight', 'Viking']
+names = ['Soldier', 'Knight', 'Viking', 'Zombie']
 
 class Card:
   def __init__(self, side_ = None, name_ = None):
