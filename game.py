@@ -2,11 +2,22 @@ import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode, Keyboar
 from PIL import Image, ImageDraw
 from pygame.locals import *
 from UI import *
+from pygame.locals import *
+
+
 
 pygame.init()
+
+pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP,MOUSEBUTTONUP,MOUSEBUTTONDOWN])
+
+flags = FULLSCREEN | DOUBLEBUF
+
 pygame.display.set_caption('Clash Impasta')
 
-Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
+Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT),flags)
+
+Display.set_alpha(None)
+
 Grid = grid.Grid()
 Selector = [selector.CardSelector(0), selector.CardSelector(1)]
 CardPointer = KeyboardCardSelector.CardPointer(Selector[0], Grid)
