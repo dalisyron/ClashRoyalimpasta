@@ -1,4 +1,4 @@
-import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode, KeyboardCardSelector, joystick
+import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode, KeyboardCardSelector, joystick,endMode
 from PIL import Image, ImageDraw
 from pygame.locals import *
 from UI import *
@@ -22,12 +22,16 @@ Display.set_alpha(None)
 #GameTime = remainingTime --> 150000 ---> 2.5min
 initTime = 150000
 remainingTime = initTime
+extraTime=60000
+isGameEnded = False
+inExtraTime = False
 
 Grid = grid.Grid()
 Selector = [selector.CardSelector(0), selector.CardSelector(1)]
 CardPointer = KeyboardCardSelector.CardPointer(Selector[0], Grid)
 
 currentHeros = [[], []]
+currenTowers=[[],[]]
 currentBullets = []
 error_sound = pygame.mixer.Sound('Sounds/badswap.wav')
 
@@ -47,6 +51,8 @@ def addHero(x,y,Name,Side,is_tower):
     new_hero = Hero.Hero(x,y,Name,Side,is_tower)
     currentHeros[Side].append(new_hero)
     Grid.mat[y][x] = new_hero
+    if is_tower == True:
+        currenTowers[Side].append(new_hero)
 
 background_surface = UI.buildBackground()
 
@@ -60,7 +66,7 @@ def updateUI():
     UI.blitBullets(currentBullets,Display)
     UI.blitDecorations(Display)
   #new new
-    UI.blitTimer(Display,remainingTime)
+    UI.blitTimer(Display,remainingTime,inExtraTime)
 
 
 def init():
@@ -80,6 +86,37 @@ def errorSound():
     error_sound.play()
 
 init()
+
+def checkForEnd():
+
+    global inExtraTime,remainingTime
+
+    if currenTowers[0][1].is_alive == False:
+            endMode.main(Display,True)
+
+    if currenTowers[1][1].is_alive == False:
+            endMode.main(Display,False)
+
+    if inExtraTime == False and remainingTime < 50:
+        cnt0=0
+        cnt1=0
+        if currenTowers[0][0].is_alive == False:
+            cnt0+=1
+        if currenTowers[0][2].is_alive == False:
+            cnt0+=1
+        if currenTowers[1][0].is_alive == False:
+            cnt1+=1
+        if currenTowers[1][2].is_alive == False:
+            cnt1+=1
+        if cnt1 != cnt0:
+            endMode.main(Display,cnt0 > cnt1)
+        inExtraTime = True
+
+    elif inExtraTime == True and remainingTime < 50:
+        right = currenTowers[1][0].health + currenTowers[1][2].health + currenTowers[1][1].health
+        left = currenTowers[0][0].health + currenTowers[0][2].health + currenTowers[0][1].health
+        endMode.main(Display,right > left)
+
 
 mouseX, mouseY = 0, 0
 dX, dY = 0, 0
@@ -104,9 +141,12 @@ delayTime = pygame.time.get_ticks()
 
 while True:
     remainingTime = initTime - ( pygame.time.get_ticks() - delayTime)
+    if inExtraTime == True :
+        remainingTime += extraTime
     cnt += 1
     Display.fill(LIGHT_YELLOW)
     updateUI()
+    checkForEnd()
     checkForQuit()
     mouseX, mouseY = pygame.mouse.get_pos()
     Hero.herosProcess(Grid,currentHeros, currentBullets, cnt)
