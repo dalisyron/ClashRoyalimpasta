@@ -56,8 +56,8 @@ def updateUI():
     UI.blitDecorations(Display)
 
 def init():
-    names = ['Soldier', 'Knight', 'Viking', 'Zombie']
-    for i in range(4):
+    names = ['Soldier', 'Knight', 'Viking', 'Zombie', 'Ninja', 'Soldier76', 'Big_Hero']
+    for i in range(7):
         Selector[0].addCard(card.Card(side_ = 0, name_ = names[i]))
         Selector[1].addCard(card.Card(side_ = 1, name_ = names[i]))
     addHero(0,  2, "Small_Tower", 0, True)
