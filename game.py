@@ -1,4 +1,4 @@
-import pygame, UI, sys, time, random, grid, card, Hero,Bullet
+import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode
 from PIL import Image, ImageDraw
 from pygame.locals import *
 from UI import *
@@ -70,6 +70,13 @@ cnt = 0
 
 clock = pygame.time.Clock()
 clock.tick(60)
+
+isGameStarted = False
+if isGameStarted == False:
+    startMode.main(Display)
+
+# 0 ------> player vs player
+# 1 ------> player vs computer
 
 while True:
     cnt += 1
