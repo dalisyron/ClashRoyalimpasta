@@ -1,4 +1,4 @@
-import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode
+import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode, KeyboardCardSelector
 from PIL import Image, ImageDraw
 from pygame.locals import *
 from UI import *
@@ -9,6 +9,7 @@ pygame.display.set_caption('Clash Impasta')
 Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT))
 Grid = grid.Grid()
 Selector = [selector.CardSelector(0), selector.CardSelector(1)]
+CardPointer = KeyboardCardSelector.CardPointer(Selector[0], Grid)
 
 currentHeros = [[], []]
 currentBullets = []
@@ -38,6 +39,7 @@ def updateUI():
     UI.blitLeftSelector(Selector[0], Display, pygame.time.get_ticks())
     UI.blitRightSelector(Selector[1], Display, pygame.time.get_ticks())
     UI.blitGrid(Grid, Display)
+    UI.blitKeyboardSelector(CardPointer, Display)
     #new
     UI.blitBullets(currentBullets,Display)
     UI.blitDecorations(Display)
@@ -115,6 +117,15 @@ while True:
                     errorSound()
             mouseClicked = False
             selected_card = None
+        elif event.type == KEYDOWN:
+          if (event.key == K_DOWN):
+            CardPointer.down()
+          elif (event.key == K_UP):
+            CardPointer.up()
+          elif (event.key == K_RIGHT):
+            CardPointer.right()
+          elif (event.key == K_LEFT):
+            CardPointer.left()
     if mouseClicked == True and selected_card != None:
         Display.blit(selected_card.image, (mouseX - dX, mouseY - dY))
     pygame.display.update()

@@ -11,6 +11,9 @@ BLUE  = (  0,   0, 255)
 LIGHT_YELLOW = (255, 255, 204)
 YELLOW       = (255, 255,   0)
 
+TILE_WIDTH = 50
+TILE_HEGIHT = 85
+
 GRASS_SURFACE      = pygame.image.load('Images/grass.png')
 STONE_SURFACE      = pygame.image.load('Images/stone.png')
 LIGHTWOOD_SURFACE  = pygame.image.load('Images/lightwood.png')
@@ -19,6 +22,9 @@ TALL_TREE_SURFACE  = pygame.image.load('Images/Tree_Tall.png')
 SHORT_TREE_SURFACE = pygame.image.load('Images/Tree_Short.png')
 TALL_TOWER         = pygame.image.load('Images/tall_tower.png')
 SMALL_TOWER        = pygame.image.load('Images/small_tower.png')
+KEYBOARD_SELECTOR  = pygame.Surface((TILE_WIDTH, TILE_WIDTH))
+
+KEYBOARD_SELECTOR.fill(RED)
 
 img_surface = {'g':GRASS_SURFACE, 's':STONE_SURFACE, 'l':LIGHTWOOD_SURFACE, 'd':DARKWOOD_SURFACE,
                't':SHORT_TREE_SURFACE, 'T':TALL_TREE_SURFACE, 'B':TALL_TOWER, 'S':SMALL_TOWER, 
@@ -27,13 +33,26 @@ img_surface = {'g':GRASS_SURFACE, 's':STONE_SURFACE, 'l':LIGHTWOOD_SURFACE, 'd':
 mapMat = Util.buildGrid('map.txt')
 decMat = Util.buildGrid('decorations.txt')
 
-TILE_WIDTH = 50
-TILE_HEGIHT = 85
-
 CARD_STACK_SIZE = 50
 
 BOARD_WIDTH = TILE_WIDTH * len(mapMat[0]) + 2 * CARD_STACK_SIZE
 BOARD_HEIGHT = TILE_WIDTH * len(mapMat)
+
+def blitAlpha(target, source, location, opacity):
+  x = location[0]
+  y = location[1]
+  temp = pygame.Surface((source.get_width(), source.get_height())).convert()
+  temp.blit(target, (-x, -y))
+  temp.blit(source, (0, 0))
+  temp.set_alpha(opacity)        
+  target.blit(temp, location)
+
+def blitKeyboardSelector(ks, d):
+  if (ks.on_grid):
+    blitAlpha(d, KEYBOARD_SELECTOR, (ks.c * TILE_WIDTH + CARD_STACK_SIZE, ks.r * TILE_WIDTH + (TILE_HEGIHT - TILE_WIDTH)), 80)
+  else:
+    blitAlpha(d, KEYBOARD_SELECTOR, (ks.c * TILE_WIDTH, ks.r * TILE_WIDTH), 80)
+
 
 def buildBackground():
   background_surface = pygame.Surface([BOARD_WIDTH,BOARD_HEIGHT], pygame.SRCALPHA, 32)
