@@ -18,6 +18,10 @@ Display = pygame.display.set_mode((BOARD_WIDTH, BOARD_HEIGHT),flags)
 
 Display.set_alpha(None)
 
+#GameTime = remainingTime --> 150000 ---> 2.5min
+initTime = 150000
+remainingTime = initTime
+
 Grid = grid.Grid()
 Selector = [selector.CardSelector(0), selector.CardSelector(1)]
 CardPointer = KeyboardCardSelector.CardPointer(Selector[0], Grid)
@@ -54,7 +58,10 @@ def updateUI():
     #new
     UI.blitBullets(currentBullets,Display)
     UI.blitDecorations(Display)
-
+  #new new
+    UI.blitTimer(Display,remainingTime)
+    
+    
 def init():
     names = ['Soldier', 'Knight', 'Viking', 'Zombie', 'Ninja', 'Soldier76', 'Big_Hero']
     for i in range(7):
@@ -92,8 +99,10 @@ if isGameStarted == False:
 
 # 0 ------> player vs player
 # 1 ------> player vs computer
+delayTime = pygame.time.get_ticks()
 
 while True:
+    remainingTime = initTime - ( pygame.time.get_ticks() - delayTime)
     cnt += 1
     Display.fill(LIGHT_YELLOW)
     updateUI()

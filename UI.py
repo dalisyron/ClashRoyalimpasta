@@ -144,3 +144,15 @@ def blitBullets(currentBullets,d):
   for bullet in currentBullets:
     if bullet.is_destroyed == False :
       pygame.draw.circle(d,(0,0,0),(int(bullet.position_x) , int(bullet.position_y)),6,3)
+
+def blitTimer(d,time):
+  time //= 1000
+  minute = str(time // 60)
+  second = str(time % 60)
+  timeStr = minute + ":" + second
+  fontObj = pygame.font.Font('freesansbold.ttf', 33)
+  textSurfaceObj = fontObj.render(timeStr, True, GREEN, BLUE)
+  textRectObj = textSurfaceObj.get_rect()
+  w, h = d.get_size()
+  textRectObj.center = (w//2,h - 20)
+  d.blit(textSurfaceObj,textRectObj)
