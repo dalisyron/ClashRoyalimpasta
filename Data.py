@@ -2,21 +2,21 @@ import pygame
 
 Heros_Dic={"Viking" :
                {"DAMAGE_RATE":40 ,
-                "SPEED_RATE":25,
+                "SPEED_RATE":80,
                 "HEALTH":100,
                 "BULLET":"Gun" ,
                 "LOADTIME":5000,
                 'IMAGE':{0:pygame.image.load('Images/Viking.png'), 1:pygame.image.load('Images/Viking1.png')}},
            "Knight" :{
-               "DAMAGE_RATE":45 ,
-               "SPEED_RATE":10,
+               "DAMAGE_RATE":20 ,
+               "SPEED_RATE":40,
                "HEALTH":100,
                "BULLET":"Sword",
                "LOADTIME":3000,
                 'IMAGE':{0:pygame.image.load('Images/Knight.png'), 1:pygame.image.load('Images/Knight1.png')}},
            "Soldier" :{
-              "DAMAGE_RATE":90 ,
-              "SPEED_RATE":10,
+              "DAMAGE_RATE":30 ,
+              "SPEED_RATE":30,
               "HEALTH":100,
               "BULLET":"Sword",
               "LOADTIME":1000,
