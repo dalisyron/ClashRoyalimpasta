@@ -3,7 +3,7 @@ import pygame
 Heros_Dic={"Viking" :
                {"DAMAGE_RATE":40 ,
                 "SPEED_RATE":80,
-                "HEALTH":100,
+                "HEALTH":500,
                 "BULLET":"Gun" ,
                 "LOADTIME":5000,
                 'IMAGE':{0:pygame.image.load('Images/Viking.png'), 1:pygame.image.load('Images/Viking1.png')}},
