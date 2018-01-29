@@ -1,4 +1,4 @@
-import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode, KeyboardCardSelector
+import pygame, UI, sys, time, random, grid, card, Hero,Bullet,startMode, KeyboardCardSelector, joystick
 from PIL import Image, ImageDraw
 from pygame.locals import *
 from UI import *
@@ -9,6 +9,7 @@ from pygame.locals import *
 pygame.init()
 
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP,MOUSEBUTTONUP,MOUSEBUTTONDOWN])
+joystick.main()
 
 flags = DOUBLEBUF
 
@@ -60,8 +61,8 @@ def updateUI():
     UI.blitDecorations(Display)
   #new new
     UI.blitTimer(Display,remainingTime)
-    
-    
+
+
 def init():
     names = ['Soldier', 'Knight', 'Viking', 'Zombie', 'Ninja', 'Soldier76', 'Big_Hero']
     for i in range(7):
@@ -149,7 +150,6 @@ while True:
           elif (event.key == K_LEFT):
             CardPointer.left()
           elif (event.key == K_RETURN):
-            print(selected_card2)
             if selected_card2 != None:
                 if CardPointer.on_grid and Grid.mat[CardPointer.r][CardPointer.c] == 0 and CardPointer.c < Grid.width // 2:
                     addHero(CardPointer.c, CardPointer.r + 1, selected_card2.name, selected_card2.side, False)
@@ -163,6 +163,31 @@ while True:
                         selected_card2.av_time = pygame.time.get_ticks()
                     else:
                         selected_card2 = None
+        if (joystick.flag):
+            pressed_key = joystick.getPressedKey()
+            if (pressed_key == 'up'):
+                CardPointer.up()
+            elif (pressed_key == 'down'):
+                CardPointer.down()
+            elif (pressed_key == 'left'):
+                CardPointer.left()
+            elif (pressed_key == 'right'):
+                CardPointer.right()
+            elif (pressed_key == 'A'):
+                if selected_card2 != None:
+                    if CardPointer.on_grid and Grid.mat[CardPointer.r][CardPointer.c] == 0 and CardPointer.c < Grid.width // 2:
+                        addHero(CardPointer.c, CardPointer.r + 1, selected_card2.name, selected_card2.side, False)
+                        selected_card2 = None
+                    else:
+                        errorSound()
+                else:
+                    if (CardPointer.on_grid == False):
+                        selected_card2 = Selector[0].card_list[CardPointer.r]
+                        if (pygame.time.get_ticks() - selected_card2.av_time > Data.Heros_Dic[selected_card2.name]["LOADTIME"]):
+                            selected_card2.av_time = pygame.time.get_ticks()
+                        else:
+                            selected_card2 = None
+            
     if mouseClicked == True and selected_card != None:
         Display.blit(selected_card.image, (mouseX - dX, mouseY - dY))
     pygame.display.update()
