@@ -67,6 +67,7 @@ dX, dY = 0, 0
 mouseClicked = False
 
 selected_card = None
+selected_card2 = None
 
 cnt = 0
 
@@ -126,6 +127,21 @@ while True:
             CardPointer.right()
           elif (event.key == K_LEFT):
             CardPointer.left()
+          elif (event.key == K_RETURN):
+            print(selected_card2)
+            if selected_card2 != None:
+                if CardPointer.on_grid and Grid.mat[CardPointer.r][CardPointer.c] == 0 and CardPointer.c < Grid.width // 2:
+                    addHero(CardPointer.c, CardPointer.r + 1, selected_card2.name, selected_card2.side, False)
+                    selected_card2 = None
+                else:
+                    errorSound()
+            else:
+                if (CardPointer.on_grid == False):
+                    selected_card2 = Selector[0].card_list[CardPointer.r]
+                    if (pygame.time.get_ticks() - selected_card2.av_time > Data.Heros_Dic[selected_card2.name]["LOADTIME"]):
+                        selected_card2.av_time = pygame.time.get_ticks()
+                    else:
+                        selected_card2 = None
     if mouseClicked == True and selected_card != None:
         Display.blit(selected_card.image, (mouseX - dX, mouseY - dY))
     pygame.display.update()
