@@ -74,7 +74,7 @@ def main(d):
             if event.type == MOUSEBUTTONUP :
                 if check() != None and check()!=2:
                     print (selectedItem)
-                    return selectedItem
+                    return check()
                 if check() == 2:
                     terminate()
         checkForQuit()

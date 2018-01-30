@@ -11,7 +11,7 @@ pygame.init()
 pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP,MOUSEBUTTONUP,MOUSEBUTTONDOWN])
 joystick.main()
 
-flags = DOUBLEBUF
+flags = FULLSCREEN | DOUBLEBUF
 
 pygame.display.set_caption('Clash Impasta')
 
@@ -131,14 +131,42 @@ cnt = 0
 clock = pygame.time.Clock()
 clock.tick(60)
 
+flagai = 0
+
 isGameStarted = False
 if isGameStarted == False:
-    startMode.main(Display)
+    flagai = startMode.main(Display)
+print('flagai', flagai)
 
 # 0 ------> player vs player
 # 1 ------> player vs computer
 delayTime = pygame.time.get_ticks()
 
+last_card_added_time = 0
+
+def aiDecide():
+    global last_card_added_time
+    selected_dmg = 100000
+    ind = 0
+    if (pygame.time.get_ticks() - last_card_added_time < 1000):
+        return
+    for i in range (len(Selector[0].card_list)):
+        selected_card = Selector[0].card_list[i]
+        if (Data.Heros_Dic[selected_card.name]["DAMAGE_RATE"] < selected_dmg and 
+            pygame.time.get_ticks() - selected_card.av_time > Data.Heros_Dic[selected_card.name]["LOADTIME"]):
+            selected_dmg = Data.Heros_Dic[selected_card.name]["DAMAGE_RATE"]
+            ind = i
+    flag3 = False
+    for i in range(Grid.height - 3, 3, -1):
+        if (flag3):
+            break
+        for j in range(3, Grid.width // 2):
+            if (Grid.mat[i][j] == 0):
+                addHero(j, i, Selector[0].card_list[ind].name, Selector[0].card_list[ind].side, False)
+                Selector[0].card_list[ind].av_time = pygame.time.get_ticks()
+                last_card_added_time = pygame.time.get_ticks()
+                flag3 = True
+                break
 while True:
     remainingTime = initTime - ( pygame.time.get_ticks() - delayTime)
     if inExtraTime == True :
@@ -152,7 +180,8 @@ while True:
     Hero.herosProcess(Grid,currentHeros, currentBullets, cnt)
     Bullet.bulletsProcess(Grid,currentBullets)
     grid.updateGrid(Grid, currentHeros)
-
+    if (flagai):
+        aiDecide()
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
             mouseClicked = True
